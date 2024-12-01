@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    font-family: Arial, Arial, Helvetica, sans-serif;
+}
+
+
+
+footer {
+    background: rgb(203, 130, 255);
+    display: flex;
+    flex-direction: column;
+    color: #000000;
+    padding-top: 5px;
+}
+
+.footer_text {
+    font-size: 10px;
+    text-align: center;
+    margin: 2px;
+}
+
+#footer_icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#footer_icon img {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    margin-bottom: 0;
+}
