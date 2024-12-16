@@ -3,128 +3,29 @@ const nextButton = document.getElementById('next');
 const slider = document.querySelector('.slider');
 const slideHeight = document.querySelector('.slide').offsetHeight;
 const totalSlides = document.querySelectorAll('.slide').length;
-const coffeeOrderBlock = document.getElementById("coffee_order_block");
-let mainMenu = document.querySelector('.main_menu')
-let coffeeCard = document.querySelector('.coffee_card')
-const buyButton = document.querySelector('.buy_button');
-let sizeButton = document.querySelector(".size_button");
-let extraButton = document.querySelector(".extra_button");
-let milkButton = document.querySelector(".milk_button");
 
-let currFilter = "";
-let currentIndex = 0;
+const coffeeBlock = document.querySelector(".coffee-list");
+const rightMenu = document.querySelector(".right-menu");
+const menu = document.querySelector(".menu");
+const main = document.querySelector("main");
+const body = document.querySelector("body");
+const orderMenu = document.querySelector(".order-menu");
+const coffeeOrderBlock = document.getElementById("coffee-order-block");
+const orderImageBlock = document.querySelector(".order-image");
+const orderedCoffeeBlock = document.getElementById("ordered-coffee-block");
+const costsBlock = document.querySelector(".prices-block");
+let sizeButton = document.querySelector(".coffee-size");
+let extraButton = document.querySelector(".coffee-extra");
+let milkButton = document.querySelector(".coffee-milk");
+
 let coffeeSelectors = [];
 let orderedCoffeeList = [];
-
+let currentIndex = 0;
 let selectedSize = "";
 let selectedExtra = "";
 let selectedMilk = "";
-let coffee = [
-    {
-        "Title": "Espresso",
-        "Cost": "99",
-        "Type": "Espresso",
-        "Image": "images/esspreso.webp"
-    },
-    {
-        "Title": "Cappuccino 1",
-        "Cost": "99",
-        "Type": "Cappuccino",
-        "Image": "images/capuchino1.webp"
-    },
-    {
-        "Title": "Cappuccino 2",
-        "Cost": "99",
-        "Type": "Cappuccino",
-        "Image": "images/capuchino2.webp"
-    },
-    {
-        "Title": "Cappuccino 3",
-        "Cost": "99",
-        "Type": "Cappuccino",
-        "Image": "images/capuchino3.webp"
-    },
-    {
-        "Title": "Latte 1",
-        "Cost": "99",
-        "Type": "Latte",
-        "Image": "images/latte1.webp"
-    },
-    {
-        "Title": "Latte 2",
-        "Cost": "99",
-        "Type": "Latte",
-        "Image": "images/latte2.webp"
-    },
-    {
-        "Title": "Americano",
-        "Cost": "99",
-        "Type": "Americano",
-        "Image": "images/americano.webp"
-    },
-    {
-        "Title": "Macchiato 1",
-        "Cost": "99",
-        "Type": "Macchiato",
-        "Image": "images/macchiato.webp"
-    },
-    {
-        "Title": "Macchiato 2",
-        "Cost": "99",
-        "Type": "Macchiato",
-        "Image": "images/macchiato2.webp"
-    },
-    {
-        "Title": "Raf 1",
-        "Cost": "99",
-        "Type": "Raf",
-        "Image": "images/raf1.webp"
-    },
-    {
-        "Title": "Raf 2",
-        "Cost": "99",
-        "Type": "Raf",
-        "Image": "images/raf2.webp"
-    },
-    {
-        "Title": "Mocha 1",
-        "Cost": "99",
-        "Type": "Mocha",
-        "Image": "images/mocha1.webp"
-    },
-    {
-        "Title": "Mocha 2",
-        "Cost": "99",
-        "Type": "Mocha",
-        "Image": "images/mocha2.webp"
-    },
-    {
-        "Title": "Glasse 1",
-        "Cost": "99",
-        "Type": "Glasse",
-        "Image": "images/glasse1.webp"
-    },
-    {
-        "Title": "Glasse 2",
-        "Cost": "99",
-        "Type": "Glasse",
-        "Image": "images/Glasse2.webp"
-    },
-    {
-        "Title": "Irish",
-        "Cost": "99",
-        "Type": "Irish",
-        "Image": "images/irish.webp"
-    },
-    {
-        "Title": "Bicerin",
-        "Cost": "99",
-        "Type": "Bicerin",
-        "Image": "images/Bicerin.webp"
-    },
-]
 
-function updateSliderPosition() {
+const updateSliderPosition = () => {
     slider.style.transform = `translateY(-${currentIndex * slideHeight}px)`;
 
 }
@@ -147,62 +48,210 @@ nextButton.addEventListener('click', () => {
 
 updateSliderPosition();
 
-const showBox = (coffee) => {
-    return `<div class="box" id="${coffee.Type}">
-                <img src="${coffee.Image}" alt="image">
-                <p>${coffee.Title}</p>
-                <div class="box_buy">
-                    <p>${coffee.Cost}</p>
-                    <button class="buy_button" onclick="updateLocalStorage()">+</button>
-                </div>
-            </div>
-                `
-}
-const showAllCoffee = () => {
-    let s = ''
-    coffee.map((coffee) => {
-        s += showBox(coffee)
-    })
-    mainMenu.innerHTML = s
-
-}
-showAllCoffee()
 for (let i = 1; i <= 5; i++) {
-    coffeeSelectors.push(document.getElementById(`${i}-coffee-type`));
+    coffeeSelectors.push(document.getElementById(`${i}-coffee-Type`));
 }
-const Init = () => {
+
+
+
+let coffee = [
+    {
+        "Title": "Espresso",
+        "Cost": "99",
+        "Type": "Espresso",
+        "Image": "images/esspreso.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Cappuccino 1",
+        "Cost": "99",
+        "Type": "Cappuccino",
+        "Image": "images/capuchino1.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Cappuccino 2",
+        "Cost": "99",
+        "Type": "Cappuccino",
+        "Image": "images/capuchino2.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+
+    },
+    {
+        "Title": "Cappuccino 3",
+        "Cost": "99",
+        "Type": "Cappuccino",
+        "Image": "images/capuchino3.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Latte 1",
+        "Cost": "99",
+        "Type": "Latte",
+        "Image": "images/latte1.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Latte 2",
+        "Cost": "99",
+        "Type": "Latte",
+        "Image": "images/latte2.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Americano",
+        "Cost": "99",
+        "Type": "Americano",
+        "Image": "images/americano.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Macchiato 1",
+        "Cost": "99",
+        "Type": "Macchiato",
+        "Image": "images/macchiato.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Macchiato 2",
+        "Cost": "99",
+        "Type": "Macchiato",
+        "Image": "images/macchiato2.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Raf 1",
+        "Cost": "99",
+        "Type": "Raf",
+        "Image": "images/raf1.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Raf 2",
+        "Cost": "99",
+        "Type": "Raf",
+        "Image": "images/raf2.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Mocha 1",
+        "Cost": "99",
+        "Type": "Mocha",
+        "Image": "images/mocha1.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Mocha 2",
+        "Cost": "99",
+        "Type": "Mocha",
+        "Image": "images/mocha2.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Glasse 1",
+        "Cost": "99",
+        "Type": "Glasse",
+        "Image": "images/glasse1.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Glasse 2",
+        "Cost": "99",
+        "Type": "Glasse",
+        "Image": "images/Glasse2.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Irish",
+        "Cost": "99",
+        "Type": "Irish",
+        "Image": "images/irish.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+    {
+        "Title": "Bicerin",
+        "Cost": "99",
+        "Type": "Bicerin",
+        "Image": "images/Bicerin.webp",
+        "Size": ["Little", "Middle", "Big"],
+        "Extra": ["Sugar", "Milk"],
+        "Milk": ["Oat", "Cow"]
+    },
+]
+let selectedBlock = -1;
+
+let totalCost = 0;
+let totalCount = 0;
+
+let currFilter = "";
+
+
+const showCoffee = () => {
     let s = "";
     coffee.forEach(elem => {
-        if (currFilter == "" || elem.name.toLowerCase().includes(currFilter.toLowerCase())) {
-            s += `<div class="coffee-card" id="${elem.type}-block">`;
-            s += `<a name="${elem.type}"></a>`;
-            s += `<img src="${elem.image}">`;
-            s += `<p>${elem.name}</p>`;
+        if (currFilter == "" || elem.Title.toLowerCase().includes(currFilter.toLowerCase())) {
+            s += `<div class="coffee-card" id="${elem.Type}">`;
+            s += `<a Title="${elem.Type}"></a>`;
+            s += `<img src="${elem.Image}">`;
+            s += `<p>${elem.Title}</p>`;
             s += `<div class="order-button-block">`;
             s += `<div class="order-text-block">`;
-            s += `<p>${elem.price} RUB</p>`;
+            s += `<p>R ${elem.Cost} </p>`;
             s += `</div>`;
-            s += `<button class="order-button" onclick="OrderCoffee('${elem.name}')">+</button>`;
+            s += `<button class="order-button" onclick="OrderCoffee('${elem.Title}')">+</button>`;
             s += `</div>`;
             s += `</div>`;
         }
 
     });
     coffeeBlock.innerHTML = s;
-    Update();
 }
 
-Init();
-const OrderCoffee = (coffee) => {
-    OpenOrderMenu();
-    let currCoffee = FindCoffee(coffee);
+showCoffee();
+
+
+const OrderCoffee = (coffeeTitle) => {
+    OpenCoffeeCard();
+    let currCoffee = FindCoffee(coffeeTitle);
     let i = 0;
 
-    let size = "<div class='extra_list'>";
-    currCoffee.size.forEach(elem => {
+    let size = "<div class='extra-list'>";
+    currCoffee.Size.forEach(elem => {
         size +=
             `
-        <div class="size" onclick="ChooseSize(${i})">
+        <div class="coffee-size" onclick="ChooseCoffeeSize(${i})">
             <p>${elem}</p>
         </div>
         `
@@ -210,12 +259,12 @@ const OrderCoffee = (coffee) => {
     });
     size += "</div>"
 
-    let extra = "<div class='extra_list'>";
+    let extra = "<div class='extra-list'>";
     i = 0;
-    currCoffee.extra.forEach(elem => {
+    currCoffee.Extra.forEach(elem => {
         extra +=
             `
-        <div class="extra" onclick="ChooseExtra(${i})">
+        <div class="coffee-extra" onclick="ChooseCoffeeExtra(${i})">
             <p>${elem}</p>
         </div>
         `
@@ -223,117 +272,188 @@ const OrderCoffee = (coffee) => {
     });
     extra += "</div>"
     i = 0;
-    let milk = "<div class='extra_list'>";
-    currCoffee.milks.forEach(elem => {
-        milk +=
+    let Milk = "<div class='extra-list'>";
+    currCoffee.Milk.forEach(elem => {
+        Milk +=
             `
-        <div class="milk" onclick="ChooseMilk(${i})">
+        <div class="coffee-milk" onclick="ChooseCoffeeMilk(${i})">
             <p>${elem}</p>
         </div>
         `
         i += 1;
     });
-    milk += "</div>"
+    Milk += "</div>"
 
     if (currCoffee) {
         orderImageBlock.innerHTML =
             `
-        <img src="${currCoffee.image}">
+        <img src="${currCoffee.Image}">
         `
         coffeeOrderBlock.innerHTML =
             `
-        <h5>${currCoffee.name}</h5>
-        <p >Size</p>
+        <h5>${currCoffee.Title}</h5>
+        <p>Size</p>
         ${size}
-        <p >Extra</p>
+        <p>Extra</p>
         ${extra}
-        <p >Milk</p>
-        ${milk}
-        <div class="buy_block">
-        <div class="count_price">
-        <p>${currCoffee.price}</p>
-        <input type="number" min="1" max="10" value="1" id="order_count_input">
+        <p>Milk</p>
+        ${Milk}
+        <div class="buy-block">
+        <div class="count-cost">
+        <p>R ${currCoffee.Cost} </p>
+        <input Type="number" min="1" max="10" value="1" id="order-count-input">
         </div>
-        <button onclick="CreateOrder('${currCoffee.name}', 0)">PLACE ORDER</button>
+        <button onclick="CreateOrder('${currCoffee.Title}', 0)">PLACE ORDER</button>
         </div>
         `;
     }
 }
-// const showCard = (coffee) => {
 
-//     return `<div class="box" >
-//                 <img src="${coffee.Image}" alt="image">
-//                 <p>${coffee.Title}</p>
-//                 <div class="box_size">
-//                     <button class="little_button" onclick="updateLocalStorage()">Little</button>
-//                     <button class="middle_button" onclick="updateLocalStorage()">Middle</button>
-//                     <button class="big_button" onclick="updateLocalStorage()">Big</button>
-//                 </div>
-//                 <div class="box_extra">
-//                     <button class="milk_button" onclick="updateLocalStorage()">Milk</button>
-//                     <button class="sugar_button" onclick="updateLocalStorage()">Sugar</button>
-//                 </div>
-//                 <div class="box_milkType">
-//                     <button class="oat_button" onclick="updateLocalStorage()">Oat milk</button>
-//                     <button class="cow_button" onclick="updateLocalStorage()">Cow milk</button>
-//                 </div>
-//                 <div class="box_buy">
-//                     <p>${coffee.Cost}</p>
-//                     <button class="buy_button+" onclick="updateLocalStorage()">+</button>
-//                     <p>${coffee.Cost}</p>
-//                     <button class="buy_button-" onclick="updateLocalStorage()">-</button>
-//                 </div>
-//             </div>
-//                 `
-// }
-// coffee.forEach(coffee => {
-//     coffee.addEventListener('click', () => {
-//         coffeeCard.innerHTML =
-//             `
-//                 <img src="${coffee.Image}" alt="image">
-//                 <p>${coffee.Title}</p>
-//                 <div class="options">
-//                     <div class="option_group">
-//                         <h3>SIZE</h3>
-//                         <button class="size_button">Little</button>
-//                         <button class="size_button">Middle</button>
-//                         <button class="size_button">Big</button>
-//                     </div>
-//                     <div class="option_group">
-//                         <h3>EXTRA</h3>
-//                         <button class="extra_button">Sugar</button>
-//                         <button class="extra_button">Milk</button>
-//                     </div>
+const FindCoffee = (Title) => {
+    return coffee.find(element => element.Title == Title) || null;
+}
 
-//                     <div class="option_group">
-//                         <h3>MILK TYPE</h3>
-//                         <button class="milk_button">Oat</button>
-//                         <button class="milk_button">Cow</button>
-//                     </div>
-//                 </div>
-//                 <div class="order_summary">
-//                     <h2 class="price">${coffee.Cost}</h2>
-//                     <div class="quantity">
-//                         <button id="decrease">−</button>
-//                         <span id="quantity">1</span>
-//                         <button id="increase">+</button>
-//                     </div>
-//                 </div>
-//                 <button class="place_order_button">PLACE ORDER</button>
-//                 `
-//     });
-// });
+const OpenRightMenu = () => {
+    rightMenu.style.width = "25%";
+    rightMenu.style.display = "flex";
+    menu.classList.add("deactivated");
+    main.classList.add("deactivated");
+    body.style.overflow = "hidden";
+}
 
-// closebutton.addEventListener('click', () => {
-//     modal.style.display = 'none';
-// });
-// window.addEventListener('click', (e) => {
-//     if (e.target === modal) {
-//         modal.style.display = 'none';
-//     }
-// });
+const CloseRightMenu = () => {
+    rightMenu.style.width = "0%";
+    rightMenu.style.display = "none";
+    menu.classList.remove("deactivated");
+    main.classList.remove("deactivated");
+    body.style.overflow = "auto";
+}
 
-// buyButton.addEventListener('click', () => {
-//     mainMenu.style.display = "none";
-//     coffeeCard.innerHTML = showCard(coffee)
-// });
+const OpenCoffeeCard = () => {
+    orderMenu.style.display = "flex";
+    body.style.overflow = "hidden";
+    main.style.display = "none";
+    menu.style.display = "none";
+}
+
+const CloseOrderMenu = () => {
+    orderMenu.style.display = "none";
+    body.style.overflow = "auto";
+    main.style.display = "flex";
+    menu.style.display = "flex";
+}
+
+const ChooseCoffeeSize = (ind) => {
+    i = 0;
+    sizeButton = document.querySelectorAll(".coffee-size");
+    sizeButton.forEach(elem => {
+        if (i == ind) {
+            elem.classList.add("selected-coffee-extra");
+            selectedSize = elem.innerText;
+        }
+        else {
+            elem.classList.remove("selected-coffee-extra");
+        }
+        i += 1;
+    })
+}
+
+const ChooseCoffeeExtra = (ind) => {
+    i = 0;
+    extraButton = document.querySelectorAll(".coffee-extra");
+    extraButton.forEach(elem => {
+        if (i == ind) {
+            elem.classList.add("selected-coffee-extra")
+            selectedExtra = elem.innerText;
+        }
+        else {
+            elem.classList.remove("selected-coffee-extra")
+        }
+        i += 1;
+    })
+}
+
+const ChooseCoffeeMilk = (ind) => {
+    i = 0;
+    milkButton = document.querySelectorAll(".coffee-milk");
+    milkButton.forEach(elem => {
+        if (i == ind) {
+            elem.classList.add("selected-coffee-extra")
+            selectedMilk = elem.innerText;
+        }
+        else {
+            elem.classList.remove("selected-coffee-extra")
+        }
+        i += 1;
+    })
+}
+
+const CreateOrder = (Title, count_json) => {
+    let selectedCoffee = FindCoffee(Title);
+    let count = 0;
+    if (count_json == 0) {
+        count = Number(document.getElementById("order-count-input").value);
+    }
+    else {
+        count = count_json;
+    }
+    s = orderedCoffeeBlock.innerHTML;
+    s +=
+        `
+    <div class="ordered-coffee-block">
+    <div class="element-order-block">
+    <img src="${selectedCoffee.Image}">
+    </div>
+    <div class="element-order-block">
+    <p>${selectedCoffee.Title}</p>
+    </div>
+    <div class="block-count">
+    <p>${count}</p>
+    </div>
+    </div>
+    `
+    orderedCoffeeBlock.innerHTML = s;
+    totalCost += count * selectedCoffee.Cost;
+    console.log(totalCost)
+    totalCount += count;
+    let counts = document.querySelectorAll(".order-count");
+    counts.forEach(elem => {
+        elem.innerText = totalCount
+    })
+
+    let p = "";
+    p +=
+        `
+    <div class="price-total-block">
+        <p>Subtotal</p>
+        <p>R ${totalCost} </p>
+    </div>
+    <hr class ="price_hr">
+    <div class="price-total-block">
+        <p>Discount -10%</p>
+        <p>R ${(totalCost * 0.1).toFixed()} </p>
+    </div>
+    <hr class ="price_hr">
+    <div class="price-total-block">
+        
+        <p>Total</p>
+        <p>R ${(totalCost * 0.9).toFixed()} </p>
+        </div>
+        <div class="slide-close-button" onclick="CloseRightMenu()">
+        <img src="Images/right-slide.png" alt="right-slide">
+    </div>
+    `
+    costsBlock.innerHTML = p;
+    if (count_json == 0) {
+        orderedCoffeeList.push({ "Title": Title, "count": count, "Size": selectedSize, "Extra": selectedExtra, "Milk": selectedMilk });
+        CloseOrderMenu();
+    }
+}
+
+document.getElementById("search-input").addEventListener('keydown', function (e) {
+    if (e.key == "Enter") {
+        currFilter = this.value;
+    }
+    showCoffee();
+});
+
