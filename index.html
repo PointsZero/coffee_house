@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <link rel="icon" href="images/icon.jpg" type="image/x-icon">
+    <title>Coffee me</title>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="slider-wrapper">
+            <button class="arrow up" id="prev">▲</button>
+            <div class="slider-container">
+                <div class="slider">
+                    <a href="#Espresso" class="slide">Espresso </a>
+                    <a href="#Cappuccino" class="slide">Cappuccino</a>
+                    <a href="#Latte" class="slide">Latte</a>
+                    <a href="#Americano" class="slide">Americano</a>
+                    <a href="#Macchiato" class="slide">Macchiato</a>
+                    <a href="#Raf" class="slide"> Raf </a>
+                    <a href="#Mocha" class="slide">Mocha </a>
+                    <a href="#Glasse" class="slide">Glasse</a>
+                    <a href="#Irish" class="slide">Irish</a>
+                    <a href="#Bicerin" class="slide"> Bicerin</a>
+                </div>
+            </div>
+            <button class="arrow down" id="next">▼</button>
+        </div>
+    </div>
+    <main>
+        <nav>
+            <div class="search">
+                <input type="text" id="search-input" placeholder="Search coffee">
+                <img class="img_search" src="images/search.png" alt="search">
+            </div>
+            <div class="status-block" onclick="OpenRightMenu()">
+                <div class="status-block-image">
+                    <img src="images/order.png" alt="order">
+                </div>
+                <p>Order status</p>
+                <div class="status-block-count">
+                    <p class="order-count">0</p>
+                </div>
+            </div>
+        </nav>
+        <div class="coffee-list">
+
+        </div>
+    </main>
+    <div class="right-menu">
+        <div class="right-heading">
+            <p>Order Status</p>
+            <div class="right-close-button" onclick="CloseRightMenu()">
+                <p>Hide</p>
+                <img src="images/right-arrow.png" alt="right-arrow">
+            </div>
+        </div>
+        <div class="right-category-list">
+            <div class="right-category">
+                <p>Ordered</p>
+                <div id="ordered-coffee-block" class="category-coffee-block">
+
+                </div>
+            </div>
+            <div class="right-category">
+                <p>Preparing</p>
+                <div id="preparing-coffee-block" class="category-coffee-list">
+
+                </div>
+            </div>
+            <div class="right-category">
+                <p>Finishing</p>
+                <div id="finishing-coffee-block" class="category-coffee-list">
+
+                </div>
+            </div>
+            <div class="right-category">
+                <p>Served</p>
+                <div id="served-coffee-block" class="category-coffee-list">
+
+                </div>
+            </div>
+            <hr>
+            <div class="prices-block">
+
+            </div>
+        </div>
+    </div>
+    <div class="order-menu">
+        <nav>
+            <div class="back-button-block" onclick="CloseOrderMenu()">
+                <img src="images/left-arrow.png" alt="left-arrow">
+                <p>BACK TO MENU</p>
+            </div>
+            <div class="status-block">
+                <div class="status-block-image">
+                    <img src="images/order.png" alt="order">
+                </div>
+                <p>Order status</p>
+                <div class="status-block-count">
+                    <p class="order-count">0</p>
+                </div>
+            </div>
+        </nav>
+        <div class="coffee-order-data">
+            <div class="order-image">
+
+            </div>
+            <div id="coffee-order-block">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="code.js"></script>
+
+</html>
