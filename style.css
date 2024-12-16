@@ -22,10 +22,12 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
 }
 
 nav {
-    position: fixed;
+    /* position: fixed;
+    top: 90px; */
     z-index: 20;
 }
 
@@ -39,11 +41,13 @@ nav {
     border-radius: 10px;
     width: 800px;
     height: 50px;
+
 }
 
-.search p {
-    margin-left: 15px;
-    margin-top: 15px;
+.search input {
+    border: none;
+    background: #d1d1d1;
+    border-radius: 10px;
     color: #646464;
 }
 
@@ -82,7 +86,7 @@ nav {
 }
 
 .slider-wrapper {
-    position: fixed;
+    position: relative;
     width: 150px;
     height: 300px;
     margin-top: -3.5vh;
@@ -139,8 +143,6 @@ nav {
 
 }
 
-
-
 .arrow.up {
     top: -30px;
     border-top-right-radius: 10px;
@@ -155,10 +157,6 @@ nav {
 
 }
 
-
-.arrow:disabled {
-    cursor: not-allowed;
-}
 
 .main_menu {
     display: flex;
@@ -198,6 +196,11 @@ nav {
     margin-left: 45%;
 }
 
+.buy_button {
+    height: 20px;
+    width: 30px;
+}
+
 footer {
     display: flex;
     flex-direction: column;
@@ -222,4 +225,9 @@ footer {
     height: 20px;
     margin: 5px;
     margin-bottom: 0;
+}
+
+.count_price {
+    font-size: 3vw;
+    font-weight: 800;
 }
